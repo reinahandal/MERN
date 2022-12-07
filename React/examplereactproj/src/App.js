@@ -1,17 +1,12 @@
 import './App.css';
 import React from 'react';
+import PersonCard from './components/PersonCard';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello, Dojo!</h1>
-      <h2>Things I need to do</h2>
-      <ul>
-        <li>Learn React</li>
-        <li>Climb Mt Everest</li>
-        <li>Run a marathon</li>
-        <li>Feed the dogs</li>
-      </ul>
+      <PersonCard firstName="Reina" lastName="Handal" age={25} hairColor="Pink"></PersonCard>
+      <PersonCard firstName="Wednesday" lastName="Addams" age={19} hairColor="Blue Black"></PersonCard>
     </div>
   );
 }
