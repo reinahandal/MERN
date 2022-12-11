@@ -6,8 +6,7 @@ function App() {
   const [currentBoxes, setCurrentBoxes] = useState([]);
   
   const addBox = (color,width,height) => {
-    const newBoxes= [...currentBoxes,[color,width,height]];
-    setCurrentBoxes(newBoxes);
+    setCurrentBoxes([...currentBoxes,[color,width,height]]);
   }
   return (
       <>
