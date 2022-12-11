@@ -12,8 +12,8 @@ const Tabs = (props) => {
             <div style={{
                 width:"140px",
                 height:"30px",
-                border:"2px black solid",
-                borderRadius:"5px",
+                border:"2px lightgray solid",
+                padding:"5px",
                 margin: "5px"
             }} onClick={ (e) => props.selectTab(item)}>{item.label}</div>
             )
