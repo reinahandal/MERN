@@ -20,8 +20,6 @@ export default () => {
         setProducts(products.filter(product=>product._id!=productId));
     }
 
-
-
     return (
         <div>
             <ProductForm/>
