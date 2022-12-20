@@ -6,10 +6,6 @@ import People from './components/People';
 import Planets from './components/Planets';
 
 function App() {
-  // const [result, setResult] = useState("");
-  // const [resource, setResource] = useState("");
-  // const [id, setId] = useState("");
-
   return (
     <div className="App">
       <Search/>
