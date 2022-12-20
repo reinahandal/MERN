@@ -1,36 +1,41 @@
-import React from 'react'
-import { useState } from 'react'
 import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const ProductForm = (props) => {
-    const [title, setTitle] = useState("");
+const Update = () => {
+    const navigate = useNavigate();
+    const {id} = useParams();
+    const [title,setTitle] = useState("");
     const [price, setPrice] = useState(0);
     const [description, setDesc] = useState("");
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    useEffect(()=> {
+        axios.get('http://localhost:8000/api/products/'+id)
+        .then(res=> {
+            setTitle(res.data.title);
+            setDesc(res.data.description);
+            setPrice(res.data.price);
+        })
+    }, []);
 
-        axios.post('http://localhost:8000/api/products', {
+    const updateProduct = e => {
+        e.preventDefault();
+        axios.put('http://localhost:8000/api/products/'+id, {
             title,
-            price,
-            description
+            description,
+            price
         })
-        .then(res=>{
-            setDesc("");
-            setPrice(0);
-            setTitle("");
-        })
-        .catch(err=> console.log(err));
+        .then(res=> {console.log(res);navigate("/"+id)})
+        .catch(err => console.error(err));
     }
 
     return (
         <div className="container mt-5">
-            <h1 className='text-center mb-4'>Product Manager</h1>
-            <form onSubmit={handleSubmit}>
+            <h1 className='text-center mb-4'>Update Product</h1>
+            <form onSubmit={updateProduct}>
                 <div className='mb-4'>
                     <label className='form-label'>Title</label>
                     <input type="text" className='form-control' onChange={(e)=>setTitle(e.target.value)} value={title}></input>
-                    
                 </div>
                 <div className='mb-4'>
                     <label className='form-label'>Price</label>
@@ -48,4 +53,4 @@ const ProductForm = (props) => {
     )
 }
 
-export default ProductForm
+export default Update
