@@ -23,13 +23,19 @@ const GameStatus = () => {
             setLoaded(true);
         })
         .catch(err=> console.error(err));
-    }, [players]);
+    }, []);
 
     const changeStatus = (id, status) => {
             axios.put('http://localhost:8000/api/players/'+id,
             num==="1" ? {game1:status} : num==="2" ? {game2:status} : {game3:status})
                 .then(res=>{
-                    console.log(res);
+                    const objIndex=players.findIndex((obj => obj._id==id))
+                    let players1=[]
+                    num==="1" ? players1=[...players.slice(0,objIndex),{...players[objIndex], "game1":status},...players.slice(objIndex+1)]
+                    : num==="2" ? players1=[...players.slice(0,objIndex),{...players[objIndex], "game2":status},...players.slice(objIndex+1)]
+                    : players1=players1=[...players.slice(0,objIndex),{...players[objIndex], "game3":status},...players.slice(objIndex+1)]
+
+                    setPlayers(players1)
                 })
                 .catch(err=> console.log(err))
             }
